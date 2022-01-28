@@ -357,9 +357,6 @@ declare_features! (
     // Allows the use of type ascription in expressions.
     (active, type_ascription, "1.6.0", Some(23416), None),
 
-    // Allows `cfg(target_thread_local)`.
-    (active, cfg_target_thread_local, "1.7.0", Some(29594), None),
-
     // Allows specialization of implementations (RFC 1210).
     (active, specialization, "1.7.0", Some(31844), None),
 
@@ -617,6 +614,8 @@ declare_features! (
     (removed, pushpop_unsafe, "1.2.0", None, None, None),
     (removed, needs_allocator, "1.4.0", Some(27389), None,
      Some("subsumed by `#![feature(allocator_internals)]`")),
+    (removed, cfg_target_thread_local, "1.7.0", Some(29594), None,
+     Some("incompatible")),
     (removed, proc_macro_mod, "1.27.0", Some(54727), None,
      Some("subsumed by `#![feature(proc_macro_hygiene)]`")),
     (removed, proc_macro_expr, "1.27.0", Some(54727), None,
@@ -1551,7 +1550,6 @@ lazy_static! {
 // cfg(...)'s that are feature gated
 const GATED_CFGS: &[(Symbol, Symbol, fn(&Features) -> bool)] = &[
     // (name in cfg, feature, function to check if the feature is enabled)
-    (sym::target_thread_local, sym::cfg_target_thread_local, cfg_fn!(cfg_target_thread_local)),
     (sym::target_has_atomic, sym::cfg_target_has_atomic, cfg_fn!(cfg_target_has_atomic)),
     (sym::rustdoc, sym::doc_cfg, cfg_fn!(doc_cfg)),
 ];

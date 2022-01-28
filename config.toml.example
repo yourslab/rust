@@ -440,24 +440,24 @@
 # C compiler to be used to compiler C code. Note that the
 # default value is platform specific, and if not specified it may also depend on
 # what platform is crossing to what platform.
-#cc = "cc"
+cc = "/pkg/qct/software/llvm/release/arm/8.0.12/bin/clang"
 
 # C++ compiler to be used to compiler C++ code (e.g. LLVM and our LLVM shims).
 # This is only used for host targets.
-#cxx = "c++"
+cxx = "/pkg/qct/software/llvm/release/arm/8.0.12/bin/clang++"
 
 # Archiver to be used to assemble static libraries compiled from C/C++ code.
 # Note: an absolute path should be used, otherwise LLVM build will break.
-#ar = "ar"
+ar = "/pkg/qct/software/llvm/release/arm/8.0.12/bin/llvm-ar"
 
 # Ranlib to be used to assemble static libraries compiled from C/C++ code.
 # Note: an absolute path should be used, otherwise LLVM build will break.
-#ranlib = "ranlib"
+ranlib = "/pkg/qct/software/llvm/release/arm/8.0.12/bin/llvm-ranlib"
 
 # Linker to be used to link Rust code. Note that the
 # default value is platform specific, and if not specified it may also depend on
 # what platform is crossing to what platform.
-#linker = "cc"
+linker = "/pkg/qct/software/llvm/release/arm/8.0.12/bin/arm-link"
 
 # Path to the `llvm-config` binary of the installation of a custom LLVM to link
 # against. Note that if this is specified we don't compile LLVM at all for this

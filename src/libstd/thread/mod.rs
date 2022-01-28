@@ -195,12 +195,6 @@ pub use self::local::{LocalKey, AccessError};
 // where available, but both are needed.
 
 #[unstable(feature = "libstd_thread_internals", issue = "0")]
-#[cfg(all(target_arch = "wasm32", not(target_feature = "atomics")))]
-#[doc(hidden)] pub use self::local::statik::Key as __StaticLocalKeyInner;
-#[unstable(feature = "libstd_thread_internals", issue = "0")]
-#[cfg(target_thread_local)]
-#[doc(hidden)] pub use self::local::fast::Key as __FastLocalKeyInner;
-#[unstable(feature = "libstd_thread_internals", issue = "0")]
 #[doc(hidden)] pub use self::local::os::Key as __OsLocalKeyInner;
 
 ////////////////////////////////////////////////////////////////////////////////

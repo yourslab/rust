@@ -217,7 +217,8 @@ pub fn std_cargo(builder: &Builder<'_>,
 
         cargo.arg("--features").arg(features)
             .arg("--manifest-path")
-            .arg(builder.src.join("src/libstd/Cargo.toml"));
+            .arg(builder.src.join("src/libstd/Cargo.toml"))
+            .arg("--verbose");
 
         if target.contains("musl") {
             if let Some(p) = builder.musl_root(target) {
