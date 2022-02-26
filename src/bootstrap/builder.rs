@@ -1381,7 +1381,11 @@ impl<'a> Builder<'a> {
             cargo.env(format!("CC_{}", target.triple), &cc);
 
             let cflags = self.cflags(target, GitRepo::Rustc).join(" ");
-            cargo.env(format!("CFLAGS_{}", target.triple), &cflags);
+            let mut final_cflags = cflags.clone();
+            if target == "aarch64-unknown-linux-musl" {
+                final_cflags = cflags.clone() + " -iwithsysroot /pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/libc/include -L/pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/libc/lib";
+            }
+            cargo.env(format!("CFLAGS_{}", target.triple), &final_cflags);
 
             if let Some(ar) = self.ar(target) {
                 let ranlib = format!("{} s", ar.display());
@@ -1394,7 +1398,7 @@ impl<'a> Builder<'a> {
                 let cxx = ccacheify(&cxx);
                 cargo
                     .env(format!("CXX_{}", target.triple), &cxx)
-                    .env(format!("CXXFLAGS_{}", target.triple), cflags);
+                    .env(format!("CXXFLAGS_{}", target.triple), cflags.clone() + " -iwithsysroot /pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/libc/include -isystem-after /pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/include/c++/v1 -L /pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/lib -L /pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/libc/lib");
             }
         }
 

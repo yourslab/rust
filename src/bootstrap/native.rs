@@ -911,6 +911,11 @@ impl Step for CrtBeginEnd {
             .file(crtbegin_src)
             .file(crtend_src);
 
+        //cfg.flag("-iwithsysroot /pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/include/c++/v1/");
+        cfg.flag("-isystem-after");
+        cfg.flag("/pkg/qct/software/llvm/release/arm/10.0.9/aarch64-linux-gnu/libc/include");
+        cfg.flag("-isystem-after");
+        cfg.flag("/pkg/qct/software/llvm/release/arm/10.0.9/lib/clang/10.0.9/include");
         // Those flags are defined in src/llvm-project/compiler-rt/lib/crt/CMakeLists.txt
         // Currently only consumer of those objects is musl, which use .init_array/.fini_array
         // instead of .ctors/.dtors
